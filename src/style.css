@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  background: -webkit-gradient(linear, right top, left bottom, from(#016396), to(#0191af));
+  background: linear-gradient(to left bottom, #016396, #0191af);
+}
+
+body h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-align: center;
+  text-shadow: 0px 1px black;
+  font-size: 2.5rem;
+}
+
+body h1 span:first-child {
+  color: #d32f2f;
+}
+
+body h1 span:last-child {
+  color: #ffbc2f;
+}
+
+main {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body form {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+}
+
+.button {
+  width: 80%;
+  background: #d32f2f;
+  color: whitesmoke;
+  padding: 6px 12px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 2px 2px black;
+          box-shadow: 0px 0px 2px 2px black;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-align: center;
+  text-shadow: 0px 1px black;
+}
+
+.button:hover,
+.button:active,
+.button:focus {
+  background: #ffbc2f;
+}
+/*# sourceMappingURL=style.css.map */
