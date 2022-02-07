@@ -1,3 +1,4 @@
+import { logDOM } from "@testing-library/react";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -25,9 +26,17 @@ class Board extends React.Component {
     handleClick(i) {
         const circles = this.state.circles.slice();
         if (circles[i]) return;
-        console.log(i);
-        circles[i] = this.state.xIsNext ? "Yellow" : "Red";
-        this.setState({ circles, xIsNext: !this.state.xIsNext });
+        do {
+            console.log(i);
+            if (circles[i] == null && circles[i + 7] == null && i <= 34) {
+                i += 7;
+            } else if (circles[i] == null || i >= 35) {
+                circles[i] = this.state.xIsNext ? "Yellow" : "Red";
+                this.setState({ circles, xIsNext: !this.state.xIsNext });
+            }
+        } while (circles[i] == null);
+        if (circles[i + 7] == null) {
+        }
     }
 
     renderCircle(i) {
