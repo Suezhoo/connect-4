@@ -4,9 +4,11 @@ import "./index.css";
 
 function Circle(props) {
     return (
-        <button className="circle" onClick={props.onClick}>
-            {props.value}
-        </button>
+        <button
+            className="circle"
+            style={{ backgroundColor: props.value }}
+            onClick={props.onClick}
+        ></button>
     );
 }
 
@@ -16,13 +18,15 @@ class Board extends React.Component {
         this.state = {
             circles: Array(42).fill(null),
             xIsNext: true,
-            color: "red",
+            color: "rgba(255,255,255,0.75)",
         };
     }
 
     handleClick(i) {
-        console.log(i);
         const circles = this.state.circles.slice();
+        if (circles[i]) return;
+        console.log(i);
+        circles[i] = this.state.xIsNext ? "Yellow" : "Red";
         this.setState({ circles, xIsNext: !this.state.xIsNext });
     }
 
