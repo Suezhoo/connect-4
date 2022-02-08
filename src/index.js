@@ -1,4 +1,3 @@
-import { logDOM } from "@testing-library/react";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -13,6 +12,14 @@ function Circle(props) {
     );
 }
 
+function WinAlert(props) {
+    return (
+        <div className="WinAlert">
+            <button>Play Again</button>
+        </div>
+    );
+}
+
 class Board extends React.Component {
     constructor(props) {
         super(props);
@@ -20,23 +27,34 @@ class Board extends React.Component {
             circles: Array(42).fill(null),
             xIsNext: true,
             color: "rgba(255,255,255,0.75)",
+            gameOver: false,
         };
     }
 
     handleClick(i) {
+        if (this.state.gameOver) return;
         const circles = this.state.circles.slice();
         if (circles[i]) return;
+        this.dropCoin(i);
+    }
+
+    dropCoin(i) {
         do {
-            console.log(i);
-            if (circles[i] == null && circles[i + 7] == null && i <= 34) {
+            if (
+                this.state.circles[i] == null &&
+                this.state.circles[i + 7] == null &&
+                i <= 34
+            ) {
                 i += 7;
-            } else if (circles[i] == null || i >= 35) {
-                circles[i] = this.state.xIsNext ? "Yellow" : "Red";
-                this.setState({ circles, xIsNext: !this.state.xIsNext });
+            } else if (this.state.circles[i] == null || i >= 35) {
+                this.state.circles[i] = this.state.xIsNext ? "Yellow" : "Red";
+                this.setState({
+                    circles: this.state.circles,
+                    xIsNext: !this.state.xIsNext,
+                });
+                this.checkWin(i);
             }
-        } while (circles[i] == null);
-        if (circles[i + 7] == null) {
-        }
+        } while (this.state.circles[i] == null);
     }
 
     renderCircle(i) {
@@ -48,6 +66,32 @@ class Board extends React.Component {
                 }}
             />
         );
+    }
+    // Win conditions
+    checkVertical(i) {
+        const circles = this.state.circles.slice();
+        if (
+            circles[i] === circles[i + 7] &&
+            circles[i] === circles[i + 14] &&
+            circles[i] === circles[i + 21]
+        ) {
+            return true;
+        } else return false;
+    }
+
+    checkWin(i) {
+        if (this.checkVertical(i)) {
+            this.setState({ gameOver: true });
+            console.log(`Game won by ${this.state.circles[i]}`);
+        }
+    }
+
+    replay() {
+        this.setState({
+            circles: Array(42).fill(null),
+            xIsNext: true,
+            color: "rgba(255,255,255,0.75)",
+        });
     }
 
     render() {
@@ -114,7 +158,7 @@ class Board extends React.Component {
     }
 }
 
-class Game extends React.Component {
+class App extends React.Component {
     render() {
         return (
             <div className="game">
@@ -129,4 +173,4 @@ class Game extends React.Component {
 
 // ========================================
 
-ReactDOM.render(<Game />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
